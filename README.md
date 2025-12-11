@@ -4,7 +4,23 @@ Sistema de controle financeiro pessoal com frontend React e backend FastAPI.
 
 ## 🚀 Quick Start
 
-### Backend
+### Opção 1: Script Automático (Recomendado)
+
+**Windows:**
+```bash
+# Duplo clique em start.bat
+# ou pelo PowerShell:
+.\start.ps1
+```
+
+**Mac/Linux:**
+```bash
+python start.py
+```
+
+### Opção 2: Manual
+
+**Backend:**
 ```bash
 cd controleFinanceiro/backend
 python -m venv .venv
@@ -14,14 +30,21 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-### Frontend
+**Frontend (novo terminal):**
 ```bash
 cd controleFinanceiro/frontend
 npm install
 npm run dev
 ```
 
-Acesse: **http://localhost:5173**
+**Acesse:** http://localhost:5173
+
+## 📖 Documentação
+
+- **[INICIAR.md](INICIAR.md)** - Como iniciar a aplicação
+- **[STATUS.md](STATUS.md)** - Documentação técnica completa
+- **[TESTES_RAPIDO.md](TESTES_RAPIDO.md)** - Guia rápido de testes
+- **[GITHUB_SETUP.md](GITHUB_SETUP.md)** - Setup no GitHub
 
 ## 📋 Funcionalidades
 
