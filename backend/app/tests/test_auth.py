@@ -1,5 +1,7 @@
+import uuid
+
 def test_register_login_create_transaction(client):
-    email = "test@example.com"
+    email = f"test_{uuid.uuid4().hex[:8]}@example.com"
     password = "secret123"
 
     # register
@@ -17,7 +19,7 @@ def test_register_login_create_transaction(client):
     headers = {"Authorization": f"Bearer {token2}"}
 
     # create transaction
-    r3 = client.post('/transactions', json={"description": "Salary", "amount": 1000.0, "kind": "income"}, headers=headers)
+    r3 = client.post('/transactions', json={"description": "Salary", "amount": 1000.0, "kind": "ganho"}, headers=headers)
     assert r3.status_code == 200, f"Create transaction failed: {r3.text}"
     body = r3.json()
     assert body['description'] == 'Salary'
