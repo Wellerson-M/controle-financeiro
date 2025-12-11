@@ -1,0 +1,80 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  backend-tests:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      working-directory: ./controleFinanceiro/backend
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run tests
+      working-directory: ./controleFinanceiro/backend
+      run: python -m pytest -v --tb=short
+    
+    - name: Check code style
+      working-directory: ./controleFinanceiro/backend
+      run: |
+        pip install flake8
+        flake8 app/ --count --select=E9,F63,F7,F82 --show-source --statistics
+
+  frontend-tests:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: controleFinanceiro/frontend/package-lock.json
+    
+    - name: Install dependencies
+      working-directory: ./controleFinanceiro/frontend
+      run: npm ci
+    
+    - name: Build
+      working-directory: ./controleFinanceiro/frontend
+      run: npm run build
+    
+    - name: Check for vulnerabilities
+      working-directory: ./controleFinanceiro/frontend
+      run: npm audit --production || true
+
+  security:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+    
+    - name: Upload Trivy results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: 'trivy-results.sarif'
