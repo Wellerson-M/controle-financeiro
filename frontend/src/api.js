@@ -48,3 +48,72 @@ export async function getTransactions(token) {
   if (!res.ok) throw new Error('Falha ao obter transações')
   return res.json()
 }
+
+// Analytics
+export async function getAnalyticsOverview(token) {
+  const res = await fetch(`${API_URL}/analytics/overview`, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  })
+  if (!res.ok) throw new Error('Falha ao obter overview')
+  return res.json()
+}
+
+export async function getAnalyticsCategories(token) {
+  const res = await fetch(`${API_URL}/analytics/categories`, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  })
+  if (!res.ok) throw new Error('Falha ao obter categorias')
+  return res.json()
+}
+
+export async function getAnalyticsMonthly(token) {
+  const res = await fetch(`${API_URL}/analytics/monthly`, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  })
+  if (!res.ok) throw new Error('Falha ao obter mensal')
+  return res.json()
+}
+
+// Budgets
+export async function createBudget(token, data) {
+  const res = await fetch(`${API_URL}/budgets`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  })
+  if (!res.ok) throw new Error('Falha ao criar orçamento')
+  return res.json()
+}
+
+export async function getBudgets(token) {
+  const res = await fetch(`${API_URL}/budgets`, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  })
+  if (!res.ok) throw new Error('Falha ao obter orçamentos')
+  return res.json()
+}
+
+export async function updateBudget(token, id, data) {
+  const res = await fetch(`${API_URL}/budgets/${id}` ,{
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  })
+  if (!res.ok) throw new Error('Falha ao atualizar orçamento')
+  return res.json()
+}
+
+export async function deleteBudget(token, id) {
+  const res = await fetch(`${API_URL}/budgets/${id}`, {
+    method: 'DELETE',
+    headers: { 'Authorization': `Bearer ${token}` }
+  })
+  if (!res.ok) throw new Error('Falha ao remover orçamento')
+  return res.json()
+}

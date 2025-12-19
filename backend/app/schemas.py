@@ -27,3 +27,15 @@ class TransactionRead(TransactionCreate):
     user_id: int
     date: datetime
     is_paid: bool
+
+
+class BudgetCreate(BaseModel):
+    category: str
+    amount: float
+    period: str  # 'YYYY-MM'
+
+
+class BudgetRead(BudgetCreate):
+    id: int
+    user_id: int
+    created_at: datetime

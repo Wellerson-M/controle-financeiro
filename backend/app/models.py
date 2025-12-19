@@ -22,3 +22,12 @@ class Transaction(SQLModel, table=True):
     # installment fields
     installment_total: Optional[int] = None
     installment_index: Optional[int] = None
+
+
+class Budget(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    user_id: int = Field(foreign_key="user.id")
+    category: str
+    amount: float  # planned amount for the period
+    period: str  # e.g., '2025-12' (YYYY-MM)
+    created_at: datetime = Field(default_factory=datetime.utcnow)
