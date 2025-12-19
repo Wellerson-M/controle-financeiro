@@ -2,14 +2,19 @@
 
 Escolha uma das 3 formas abaixo:
 
-## 1️⃣ **Mais Fácil (Recomendado para você)**
+## 1️⃣ **Mais Fácil (Recomendado)**
 
-**No Windows:** Duplo clique em `start.bat`
+**Windows:** Duplo clique em `start.bat` ou no PowerShell:
 ```
-start.bat
+.\start.ps1
 ```
 
-Abre 2 janelas do terminal automaticamente com tudo rodando.
+Primeira vez ou se faltar dependências:
+```
+.\start.ps1 -Install
+```
+
+Abre 2 janelas do terminal e instala tudo automaticamente.
 
 ---
 
@@ -22,17 +27,9 @@ cd "C:\Users\Welle\OneDrive\Área de Trabalho\climax\controleFinanceiro"
 
 ---
 
-## 3️⃣ **Python (Funciona em qualquer SO)**
+## 3️⃣ **Manual (qualquer SO)**
 
-```bash
-python start.py
-```
-
-ou
-
-```bash
-python3 start.py
-```
+Veja `README.md` para passos manuais de backend e frontend.
 
 ---
 

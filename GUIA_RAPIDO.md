@@ -4,29 +4,26 @@
 
 ### 1. Iniciar a Aplicação
 
-Abra **dois terminais** separados:
-
-**Terminal 1 - Backend (API)**
+Opção rápida (Windows):
 ```powershell
+cd "C:\Users\Welle\OneDrive\Área de Trabalho\climax\controleFinanceiro"
+.\start.ps1    # ou .\start.ps1 -Install na primeira vez
+```
+
+Isso instala dependências automaticamente, inicia Backend e Frontend e abre tudo.
+
+Opção manual (se preferir):
+```powershell
+# Backend
 cd "C:\Users\Welle\OneDrive\Área de Trabalho\climax\controleFinanceiro\backend"
-.\.venv\Scripts\Activate.ps1
-uvicorn app.main:app --reload
-```
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 
-Você verá:
-```
-INFO:     Uvicorn running on http://127.0.0.1:8000
-```
-
-**Terminal 2 - Frontend (Interface)**
-```powershell
+# Frontend (novo terminal)
 cd "C:\Users\Welle\OneDrive\Área de Trabalho\climax\controleFinanceiro\frontend"
+npm install
 npm run dev
-```
-
-Você verá:
-```
-  ➜  Local:   http://localhost:5173/
 ```
 
 ### 2. Acessar a Aplicação
